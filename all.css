@@ -40,6 +40,10 @@
   -webkit-animation-name: cardZoomIn;
           animation-name: cardZoomIn;
 }
+.shake {
+  -webkit-animation-name: shake;
+          animation-name: shake;
+}
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -216,12 +220,33 @@
             transform: scale3d(0.96, 0.96, 0.96) translateY(5px);
   }
 }
+@-webkit-keyframes shake {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
+  5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+            transform: translate3d(-4px, 0, 0);
+  }
+}
+@keyframes shake {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
+  5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+            transform: translate3d(-4px, 0, 0);
+  }
+}
 .psb-money {
   position: relative;
   z-index: 99;
-  width: 1060px;
+  width: 1080px;
   max-width: 100%;
   min-height: 600px;
+  padding: 0 10px;
   font-family: Roboto, sans-serif;
   font-size: 16px;
   line-height: normal;
@@ -278,16 +303,16 @@
   height: 100%;
 }
 .psb-money-enter {
-  padding: 60px 10px 20px;
+  padding: 60px 0 20px;
 }
 @media (min-width: 375px) {
   .psb-money-enter {
-    padding: 60px 20px 40px;
+    padding: 60px 10px 40px;
   }
 }
 @media (min-width: 1025px) {
   .psb-money-enter {
-    padding: 60px 10px 10px 80px;
+    padding: 60px 0 10px 70px;
   }
 }
 .psb-money-enter__img {
@@ -706,7 +731,13 @@ a.psb-money-enter__title:hover {
   -webkit-transform: translate3d(-50%, -50%, 0);
           transform: translate3d(-50%, -50%, 0);
   display: block;
+  height: 280px;
   pointer-events: none;
+}
+@media (min-width: 680px) {
+  .psb-money-bcard__img {
+    height: auto;
+  }
 }
 .psb-money-card {
   position: relative;
@@ -721,7 +752,7 @@ a.psb-money-enter__title:hover {
   overflow: hidden;
   border: 2px solid #f57b20;
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #f4f4f4;
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.25);
           box-shadow: 0 3px 5px rgba(0,0,0,0.25);
   -webkit-user-select: none;
@@ -730,6 +761,8 @@ a.psb-money-enter__title:hover {
           user-select: none;
   cursor: -webkit-grab;
   cursor: grab;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .psb-money-q.is-correct .psb-money-card,
 .psb-money-q.is-incorrect .psb-money-card {
@@ -746,13 +779,132 @@ a.psb-money-enter__title:hover {
     height: 480px;
   }
 }
+.psb-money-card__hint {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+[data-dir="left"] .psb-money-card__hint--left {
+  visibility: visible;
+}
+[data-opacity="10"] .psb-money-card__hint--left {
+  opacity: 0.1;
+}
+[data-opacity="20"] .psb-money-card__hint--left {
+  opacity: 0.2;
+}
+[data-opacity="30"] .psb-money-card__hint--left {
+  opacity: 0.3;
+}
+[data-opacity="40"] .psb-money-card__hint--left {
+  opacity: 0.4;
+}
+[data-opacity="50"] .psb-money-card__hint--left {
+  opacity: 0.5;
+}
+[data-opacity="60"] .psb-money-card__hint--left {
+  opacity: 0.6;
+}
+[data-opacity="70"] .psb-money-card__hint--left {
+  opacity: 0.7;
+}
+[data-opacity="80"] .psb-money-card__hint--left {
+  opacity: 0.8;
+}
+[data-opacity="90"] .psb-money-card__hint--left {
+  opacity: 0.9;
+}
+[data-opacity="100"] .psb-money-card__hint--left {
+  opacity: 1;
+}
+[data-dir="right"] .psb-money-card__hint--right {
+  visibility: visible;
+}
+[data-opacity="10"] .psb-money-card__hint--right {
+  opacity: 0.1;
+}
+[data-opacity="20"] .psb-money-card__hint--right {
+  opacity: 0.2;
+}
+[data-opacity="30"] .psb-money-card__hint--right {
+  opacity: 0.3;
+}
+[data-opacity="40"] .psb-money-card__hint--right {
+  opacity: 0.4;
+}
+[data-opacity="50"] .psb-money-card__hint--right {
+  opacity: 0.5;
+}
+[data-opacity="60"] .psb-money-card__hint--right {
+  opacity: 0.6;
+}
+[data-opacity="70"] .psb-money-card__hint--right {
+  opacity: 0.7;
+}
+[data-opacity="80"] .psb-money-card__hint--right {
+  opacity: 0.8;
+}
+[data-opacity="90"] .psb-money-card__hint--right {
+  opacity: 0.9;
+}
+[data-opacity="100"] .psb-money-card__hint--right {
+  opacity: 1;
+}
+@media (min-width: 568px) {
+  .psb-money-card__hint {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  .psb-money-card__hint--left {
+    left: 25px;
+  }
+  .psb-money-card__hint--right {
+    left: auto;
+    right: 25px;
+  }
+}
+.psb-money-card__hint-icon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  color: #f57b20;
+  border: 3px solid currentColor;
+  border-radius: 100%;
+}
+.psb-money-card__hint-icon svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+@media (min-width: 680px) {
+  .psb-money-card__hint-icon {
+    width: 75px;
+    height: 75px;
+  }
+}
+.psb-money-card__hint-caption {
+  margin-top: 5px;
+  color: #f57b20;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
 .psb-money-card__head {
   -ms-flex-negative: 0;
       flex-shrink: 0;
   position: relative;
   z-index: 1;
   height: 280px;
-  background-color: #f4f4f4;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
@@ -796,16 +948,26 @@ a.psb-money-enter__title:hover {
   top: 50%;
   left: 50%;
   display: block;
-  margin: 0 auto;
+  height: 280px;
   -webkit-transform: translate3d(-50%, -50%, 0);
           transform: translate3d(-50%, -50%, 0);
   pointer-events: none;
+}
+@media (min-width: 680px) {
+  .psb-money-card__img {
+    height: auto;
+  }
 }
 .psb-money-q.is-true .psb-money-card__img {
   top: 0;
   -webkit-transform: translate3d(-50%, 0, 0);
           transform: translate3d(-50%, 0, 0);
-  height: 250px;
+  height: 200px;
+}
+@media (min-width: 680px) {
+  .psb-money-q.is-true .psb-money-card__img {
+    height: 250px;
+  }
 }
 .psb-money-q.is-false .psb-money-card__img {
   display: none;
@@ -821,6 +983,11 @@ a.psb-money-enter__title:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0 10px;
 }
 .psb-money-card__price-tag {
   position: relative;
@@ -832,6 +999,8 @@ a.psb-money-enter__title:hover {
   font-weight: 700;
   line-height: 40px;
   text-align: center;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .psb-money-card__price-tag::after {
   content: '';
@@ -845,10 +1014,19 @@ a.psb-money-enter__title:hover {
   margin: auto 0;
   border-radius: 2px;
   background-color: #ffb781;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .psb-money-card__price-tag > span {
-  position: relative;
+  position: absolute;
   z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 14px;
+  height: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .psb-money-card__price-tag > svg {
   position: absolute;
@@ -858,6 +1036,8 @@ a.psb-money-enter__title:hover {
   fill: #fff;
   -webkit-filter: drop-shadow(0 5px 10px rgba(0,0,0,0.25));
           filter: drop-shadow(0 5px 10px rgba(0,0,0,0.25));
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .psb-money-card__price-label {
   margin-top: 12px;
@@ -909,7 +1089,7 @@ a.psb-money-enter__title:hover {
   color: #e92a40;
 }
 .psb-money-result__block {
-  padding: 41px 10px 49px;
+  padding: 41px 0 49px;
   overflow: hidden;
 }
 .psb-money-result__block--bottom {

@@ -1009,6 +1009,12 @@ var Special = function (_BaseSpecial) {
       EL.qCards = (0, _dom.makeElement)('div', CSS.main + '-q__cards');
       EL.qCard = (0, _dom.makeElement)('div', CSS.main + '-q__card');
       EL.card = (0, _dom.makeElement)('div', CSS.main + '-card');
+      EL.cHintL = (0, _dom.makeElement)('div', [CSS.main + '-card__hint', CSS.main + '-card__hint--left'], {
+        innerHTML: '<div class="' + CSS.main + '-card__hint-icon">' + _svg2.default.cross + '</div><div class="' + CSS.main + '-card__hint-caption">\u041D\u0435\u043F\u0440\u0430\u0432\u0434\u0430</div>'
+      });
+      EL.cHintR = (0, _dom.makeElement)('div', [CSS.main + '-card__hint', CSS.main + '-card__hint--right'], {
+        innerHTML: '<div class="' + CSS.main + '-card__hint-icon">' + _svg2.default.tick + '</div><div class="' + CSS.main + '-card__hint-caption">\u041F\u0440\u0430\u0432\u0434\u0430</div>'
+      });
       EL.cHead = (0, _dom.makeElement)('div', CSS.main + '-card__head');
       EL.cImg = (0, _dom.makeElement)('img', CSS.main + '-card__img');
       EL.cBottom = (0, _dom.makeElement)('div', CSS.main + '-card__bottom');
@@ -1048,6 +1054,8 @@ var Special = function (_BaseSpecial) {
 
       EL.card.appendChild(EL.cHead);
       EL.card.appendChild(EL.cBottom);
+      EL.card.appendChild(EL.cHintL);
+      EL.card.appendChild(EL.cHintR);
 
       EL.qCard.appendChild(EL.card);
 
@@ -1129,10 +1137,8 @@ var Special = function (_BaseSpecial) {
       EL.bcHead = (0, _dom.makeElement)('div', CSS.main + '-bcard__head');
       EL.bcBottom = (0, _dom.makeElement)('div', CSS.main + '-bcard__bottom');
       EL.bcImg = (0, _dom.makeElement)('img', CSS.main + '-bcard__img');
-      EL.bcText = (0, _dom.makeElement)('div', CSS.main + '-bcard__text');
 
       EL.bcHead.appendChild(EL.bcImg);
-      EL.bcBottom.appendChild(EL.bcText);
       EL.backCard.appendChild(EL.bcHead);
       EL.backCard.appendChild(EL.bcBottom);
     }
@@ -1209,7 +1215,10 @@ var Special = function (_BaseSpecial) {
       this.container.removeChild(EL.result);
       this.container.appendChild(EL.q);
 
-      EL.cNextBtn.innerHTML = 'Результат';
+      EL.rImg.className = '';
+      EL.rImg = (0, _dom.makeElement)('img', CSS.main + '-result__img');
+
+      EL.cNextBtn.innerHTML = 'Далее';
       EL.cNextBtn.dataset.click = 'continue';
 
       this.setInitialParams();
@@ -1265,6 +1274,8 @@ var Special = function (_BaseSpecial) {
   }, {
     key: 'answer',
     value: function answer(t) {
+      var _this5 = this;
+
       if (this.isAnswered) {
         return;
       }
@@ -1276,6 +1287,15 @@ var Special = function (_BaseSpecial) {
 
       this.lastAnsweredType = type;
 
+      (0, _animate.animate)(EL.cHead, 'shake', '1.5s').then(function () {
+        _this5.makeAnswer(question, type, trueOrFalse);
+      });
+
+      Analytics.sendEvent('Option - ' + t);
+    }
+  }, {
+    key: 'makeAnswer',
+    value: function makeAnswer(question, type, trueOrFalse) {
       if (type === 'left') {
         EL.qOptionR.classList.add('is-hide');
       } else {
@@ -1309,8 +1329,6 @@ var Special = function (_BaseSpecial) {
         EL.cBottom.appendChild(EL.cAnswer);
         (0, _animate.animate)(EL.cAnswer, 'fadeIn', '200ms');
       });
-
-      Analytics.sendEvent('Option - ' + t);
     }
   }, {
     key: 'result',
@@ -1361,8 +1379,6 @@ var Special = function (_BaseSpecial) {
       var q = _data2.default.questions[index];
 
       EL.bcImg.src = q.img;
-      // EL.bcImg.srcset = `${q.img2x} 2x`;
-      EL.bcText.innerHTML = q.text;
 
       return EL.backCard;
     }
@@ -1556,61 +1572,61 @@ exports.default = {
     label: 'на ведро для мусора',
     answer: 'Столько денег на мусорное ведро потратил Джон Тэйн, генеральный директор инвестиционного банка Merill Lynch. Ого!',
     correct: 'right',
-    img: 'https://leonardo.osnova.io/afeac190-efc2-1e2b-f963-5cc441e1175b/'
+    img: 'https://leonardo.osnova.io/245e47b0-aea0-7635-7ff8-e4a6f5e5b9c8/'
   }, {
     price: '$18 468',
     label: 'на кресло короля Великобритании Георга IV',
     answer: 'Это всё тот же Джон Тэйн!',
     correct: 'right',
-    img: 'https://leonardo.osnova.io/546b487b-11d4-b5e4-b93e-3dd6b19b74f7/'
+    img: 'https://leonardo.osnova.io/3956c551-c409-1483-9648-e39fbbaade6b/'
   }, {
     price: '$767 тысяч',
     label: 'на четыре золотых туалета',
     answer: 'Теперь они стоят дома у Канье Уэста и Ким Кардашьян.',
     correct: 'right',
-    img: 'https://leonardo.osnova.io/0562390d-ceb1-6d7c-21df-d386f5a748ee/'
+    img: 'https://leonardo.osnova.io/72cf5d22-3abd-e5fe-1aee-4ada312f20ee/'
   }, {
     price: '$13 тысяч',
     label: 'на ужин и вино',
     answer: 'Так поужинал сооснователь Facebook Шон Паркер, который, кстати, <a href="https://www.huffingtonpost.com/2011/03/07/sean-parker-interview-quotes_n_832409.html" target="_blank">считает</a>, что богатство не делает человека «крутым».',
     correct: 'right',
-    img: 'https://leonardo.osnova.io/03644251-4948-8ac9-94c3-ba68d0950231/'
+    img: 'https://leonardo.osnova.io/712bcf8e-445f-337b-7043-44eefafcc514/'
   }, {
     price: '$20 тысяч',
     label: 'чаевых',
     answer: 'Американский телемагнат Марк Кьюбан после победы своей футбольной команды не только оставил щедрые чаевые, но ещё и неплохо вложился в алкоголь — $90 тысяч за бутылку игристого.',
     correct: 'right',
-    img: 'https://leonardo.osnova.io/ed0732e9-93e0-7cd3-a0b4-35d2e74166c9/'
+    img: 'https://leonardo.osnova.io/de51b0e4-edef-65ba-4528-aa5dad224e20/'
   }, {
     price: '$800',
     label: 'на ментоловые леденцы',
     answer: 'Мы, конечно, не можем знать наверняка, но это мы выдумали.',
     correct: 'left',
-    img: 'https://leonardo.osnova.io/c1de96f2-114e-4208-9b0e-e67e608c00d9/'
+    img: 'https://leonardo.osnova.io/fbf1b471-f39d-be9f-c7ba-1525023f9906/'
   }, {
     price: '$16 550',
     label: 'на гомеопатические средства',
     answer: 'Даже объяснять не стоит!',
     correct: 'left',
-    img: 'https://leonardo.osnova.io/6334b52d-ea12-f853-9000-5fed9018e28d/'
+    img: 'https://leonardo.osnova.io/671b6210-f59e-db2f-01d1-76f1b7d2d5b9/'
   }, {
     price: '~$35 млн',
     label: 'за билет в космос',
     answer: 'Это предположительная сумма, которую <a href="https://tjournal.ru/75165-profil-yusaku-maedzava" target="_blank">заплатил</a> японский миллиардер Юсаку Маэдзава за путешествие вокруг Луны на корабле SpaceX.',
     correct: 'right',
-    img: 'https://leonardo.osnova.io/a4244612-8be2-4911-c162-e041da6731f1/'
+    img: 'https://leonardo.osnova.io/1e327520-c080-17f5-625c-180054e2ab79/'
   }, {
     price: '$800 тысяч',
     label: 'на папирусную бумагу для печати',
     answer: 'Это слишком абсурдно. Мы ведь не в Древнем Египте!',
     correct: 'left',
-    img: 'https://leonardo.osnova.io/c06b4468-e20c-caa4-684a-169e1158e33e/'
+    img: 'https://leonardo.osnova.io/ba1eb3da-dceb-084e-4189-61faf5032e22/'
   }, {
     price: '$350 тысяч',
     label: 'на офисных хаски',
     answer: 'Но представьте, как было бы круто!',
     correct: 'left',
-    img: 'https://leonardo.osnova.io/9abdfd17-38df-9e64-a7a6-8b6b871ac9b3/'
+    img: 'https://leonardo.osnova.io/1688a691-3557-eb1a-ee52-47e183dbb534/'
   }],
   result: {
     text: '<p>Корпоративная карта «Промсвязьбанка» не избавит от абсурдных трат, но позволит контролировать расходы бизнеса при оплате товаров и услуг. <b>С помощью карты любой предприниматель сможет:</b></p><ul><li>Оплачивать любые товары и услуги на кассе и в интернете без комиссий.</li><li>Управлять лимитами держателей карт.</li><li>Всегда быть в курсе доступного остатка по карте.</li><li>Вносить выручку на расчетный счет через банкоматы банка.</li></ul>',
