@@ -1216,7 +1216,7 @@ var Special = function (_BaseSpecial) {
       this.container.appendChild(EL.q);
 
       EL.rImg.className = '';
-      EL.rImg = (0, _dom.makeElement)('img', CSS.main + '-result__img');
+      EL.rImg.classList.add(CSS.main + '-result__img');
 
       EL.cNextBtn.innerHTML = 'Далее';
       EL.cNextBtn.dataset.click = 'continue';

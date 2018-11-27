@@ -272,7 +272,6 @@
   width: 1080px;
   max-width: 100%;
   min-height: 600px;
-  padding: 0 10px;
   font-family: Roboto, sans-serif;
   font-size: 16px;
   line-height: normal;
@@ -283,6 +282,9 @@
   border-radius: 5px;
   background-color: #fff;
   overflow: hidden;
+}
+.psb-money.is-testing {
+  padding: 0 10px;
 }
 .psb-money *,
 .psb-money *:before,
@@ -329,16 +331,16 @@
   height: 100%;
 }
 .psb-money-enter {
-  padding: 60px 0 20px;
+  padding: 60px 10px 20px;
 }
 @media (min-width: 375px) {
   .psb-money-enter {
-    padding: 60px 10px 40px;
+    padding: 60px 20px 40px;
   }
 }
 @media (min-width: 1025px) {
   .psb-money-enter {
-    padding: 60px 0 10px 70px;
+    padding: 60px 20px 10px 80px;
   }
 }
 .psb-money-enter__img {
@@ -1115,7 +1117,7 @@ a.psb-money-enter__title:hover {
   color: #e92a40;
 }
 .psb-money-result__block {
-  padding: 41px 0 49px;
+  padding: 41px 10px 49px;
   overflow: hidden;
 }
 .psb-money-result__block--bottom {
