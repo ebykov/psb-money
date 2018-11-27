@@ -1287,8 +1287,14 @@ var Special = function (_BaseSpecial) {
 
       this.lastAnsweredType = type;
 
-      (0, _animate.animate)(EL.cHead, 'shake', '1.5s').then(function () {
-        _this5.makeAnswer(question, type, trueOrFalse);
+      (0, _animate.animate)(EL.cHead, 'shake', '100ms').then(function () {
+        if (trueOrFalse) {
+          _this5.makeAnswer(question, type, trueOrFalse);
+        } else {
+          (0, _animate.animate)(EL.cHead, 'flush', '400ms', '100ms').then(function () {
+            _this5.makeAnswer(question, type, trueOrFalse);
+          });
+        }
       });
 
       Analytics.sendEvent('Option - ' + t);
